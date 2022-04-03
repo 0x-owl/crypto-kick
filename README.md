@@ -15,7 +15,7 @@ kickstarter Solidity + React rip off, minimal version that fixes some of the mos
 
 ### Front end
 
-- [ ] Add React boiler plate
+- [x] Add React boiler plate
 - [ ] Add mockups
 - [ ] Add technical documentation
 - [ ] Add usage documentation
