@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import { React, Component } from 'react';
 import factory from '../ethereum/factory';
 import { Card, Button } from 'semantic-ui-react';
+import Link from 'next/link';
 import 'semantic-ui-css/semantic.min.css'
 
 
@@ -25,25 +26,27 @@ class CampaignIndex extends Component {
             address => {
                 return {
                     header: address,
-                    description: <a>View Campaign</a>,
+                    description: <Link href={`/campaigns/new/${address}`}>View Campaign</Link>,
                     fluid: true
                 };
             }
         );
-        return <Card.Group items={items} labelPosition='left'/>;
+        return <Card.Group items={items} />;
     }
 
     render () {
         return (
             <Layout>
                 <div>
-                    <h3> Open Campaigns </h3>                    
-                    <Button
-                        content='Create Campaing'
-                        icon="add circle"
-                        floated='right'
-                        primary
-                    />
+                    <h3> Open Campaigns </h3>
+                    <Link href='/campaigns/new'>                  
+                        <Button
+                            content='Create Campaing'
+                            icon="add circle"
+                            floated='right'
+                            primary
+                        />
+                    </Link>
                     {this.renderCampaigns()}
                 </div>
             </Layout>
