@@ -1,13 +1,16 @@
-import Layout from '../../components/Layout';
+import Layout from '../../../components/Layout';
 
 import { React, Component } from 'react';
-import factory from '../../ethereum/factory';
-import web3 from '../../ethereum/web3';
+import factory from '../../../ethereum/factory';
+import web3 from '../../../ethereum/web3';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
+import Link from 'next/link';
+import Router from 'next/router';
 import 'semantic-ui-css/semantic.min.css'
 
 
 class CampaignNew extends Component {
+
     state = {
         minimumContribution: '',
         errorMessage: '',
@@ -25,6 +28,9 @@ class CampaignNew extends Component {
                 this.state.minimumContribution).send({
                     from: accounts[0]
                 });
+            Router.push({
+                pathname: '/'
+            });
         } catch(err) {
             this.setState({errorMessage: err.message});
         }
@@ -35,7 +41,6 @@ class CampaignNew extends Component {
         return (
             <Layout>
                 <h3> Create a new campaing </h3>
-
                 {/* without parentesis as we are not calling it at the moment but we pass the reference */}
                 {/* so it eventually gets called when the event occurs */}
                 {/* the first ! negates the errorMessage which by default is '' that gets translated to False with ! */}
@@ -54,7 +59,7 @@ class CampaignNew extends Component {
                     <Button loading={this.state.loading} primary>Create</Button>
                 </Form>
             </Layout>
-        );
+        )
     };
 }
 
