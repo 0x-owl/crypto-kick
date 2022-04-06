@@ -1,5 +1,6 @@
 import { React, Component } from 'react'
 import Layout from '../../../components/Layout';
+import 'semantic-ui-css/semantic.min.css'
 
 class CampaignDetail extends Component {
     render() {

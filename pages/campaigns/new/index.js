@@ -4,7 +4,6 @@ import { React, Component } from 'react';
 import factory from '../../../ethereum/factory';
 import web3 from '../../../ethereum/web3';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
-import Link from 'next/link';
 import Router from 'next/router';
 import 'semantic-ui-css/semantic.min.css'
 
