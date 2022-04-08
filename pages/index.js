@@ -26,7 +26,7 @@ class CampaignIndex extends Component {
             address => {
                 return {
                     header: address,
-                    description: <Link href={`/campaigns/${address}`}>View Campaign</Link>,
+                    description: <Link href={`/campaigns/new/${address}`}>View Campaign</Link>,
                     fluid: true
                 };
             }

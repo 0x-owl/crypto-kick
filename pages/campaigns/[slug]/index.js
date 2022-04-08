@@ -1,16 +1,83 @@
 import { React, Component } from 'react'
 import Layout from '../../../components/Layout';
+import Campaign from '../../../ethereum/campaign';
+import { Card, Button } from 'semantic-ui-react';
+import web3 from '../../../ethereum/web3';
 import 'semantic-ui-css/semantic.min.css'
 
 
 class CampaignShow extends Component {
+
+    state = {
+        loading: false,
+        minimumContribution: 0,
+        balance: 0,
+        amountOfRequests: 0,
+        approversCount: 0,
+        manager: '',
+        errorMessage: '',
+    }
+    
+
+    static async getInitialProps(props) {
+        // the slug getting captured from the URL
+        const campaign = Campaign(props.query.slug);
+        const summary = await campaign.methods.getSummary().call();
+        return {
+            minimumContributionWei: {
+                value: summary['0'],
+                meta: 'Minimum Contribution (Wei)',
+                description: 'Smallest amount to contribute in weit to be part of the Campaign'
+            },
+            balance: {
+                value: web3.utils.fromWei(summary['1'], 'ether'),
+                meta: 'Campaign Balance (ETH)',
+                description: 'Current balance of the campaign.'
+            }, 
+            requestsCount: {
+                value: summary['2'],
+                meta: 'Number of requests',
+                description: 'A request represents the attempt to withdraw money from the campaign.'
+            },
+            approversCount:{
+                value: summary['3'],
+                meta: 'Number of contributors to the campaign',
+                description: 'Contributors that get to approve withdrawal requests from the campaign.'
+            },
+            manager: {
+                value: summary['4'],
+                meta: 'ERC-20 Manager Address',
+                description: 'Ethereum address from the campaign creator.'
+            }
+        }
+    }
+
+    renderCampaignSummary() {
+        // retrieve of the elements from props as we do not have an especific object
+        const items = Object.keys(this.props).map(
+            key => {
+                return {
+                    header: this.props[key].value,
+                    description: this.props[key].description,
+                    meta: this.props[key].meta,
+                    fluid: true,
+                    style: {overflowWrap: 'break-word'}
+                }
+            }
+        );
+
+        return <Card.Group items={items} />
+    }
+
+
     render() {
         return (
             <Layout>
                 <div>
                     <h3> Campaign Details </h3>
+                    {this.renderCampaignSummary()}
                 </div>
-            </Layout>   
+            </Layout>
         )
     }
 }
