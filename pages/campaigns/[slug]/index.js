@@ -6,7 +6,7 @@ class CampaignDetail extends Component {
     render() {
         return (
             <Layout>
-                <h1> Campaign ! </h1>
+                <h1> Campaignn !! </h1>
             </Layout>
         )
     }

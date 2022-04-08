@@ -1,8 +1,8 @@
-import Layout from '../../../components/Layout';
+import Layout from '../../components/Layout';
 
 import { React, Component } from 'react';
-import factory from '../../../ethereum/factory';
-import web3 from '../../../ethereum/web3';
+import factory from '../../ethereum/factory';
+import web3 from '../../ethereum/web3';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import Router from 'next/router';
 import 'semantic-ui-css/semantic.min.css'
