@@ -2,14 +2,17 @@ import { React, Component } from 'react'
 import Layout from '../../../components/Layout';
 import 'semantic-ui-css/semantic.min.css'
 
-class CampaignDetail extends Component {
+
+class CampaignShow extends Component {
     render() {
         return (
             <Layout>
-                <h1> Campaignn !! </h1>
-            </Layout>
+                <div>
+                    <h3> Campaign Details </h3>
+                </div>
+            </Layout>   
         )
     }
 }
 
-export default CampaignDetail;
+export default CampaignShow;
