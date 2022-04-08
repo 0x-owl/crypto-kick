@@ -1,7 +1,8 @@
 import { React, Component } from 'react'
 import Layout from '../../../components/Layout';
+import ContributeForm from '../../../components/ContributeForm';
 import Campaign from '../../../ethereum/campaign';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Grid, Button } from 'semantic-ui-react';
 import web3 from '../../../ethereum/web3';
 import 'semantic-ui-css/semantic.min.css'
 
@@ -73,10 +74,15 @@ class CampaignShow extends Component {
     render() {
         return (
             <Layout>
-                <div>
-                    <h3> Campaign Details </h3>
-                    {this.renderCampaignSummary()}
-                </div>
+                <h3> Campaign Details </h3>
+                <Grid>
+                    <Grid.Column width={10}>
+                        {this.renderCampaignSummary()}
+                    </Grid.Column>
+                    <Grid.Column width={6}>
+                        <ContributeForm />
+                    </Grid.Column>
+                </Grid>
             </Layout>
         )
     }
