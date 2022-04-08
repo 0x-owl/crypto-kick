@@ -25,42 +25,45 @@ class CampaignShow extends Component {
         const campaign = Campaign(props.query.slug);
         const summary = await campaign.methods.getSummary().call();
         return {
-            minimumContributionWei: {
-                value: summary['0'],
-                meta: 'Minimum Contribution (Wei)',
-                description: 'Smallest amount to contribute in weit to be part of the Campaign'
-            },
-            balance: {
-                value: web3.utils.fromWei(summary['1'], 'ether'),
-                meta: 'Campaign Balance (ETH)',
-                description: 'Current balance of the campaign.'
-            }, 
-            requestsCount: {
-                value: summary['2'],
-                meta: 'Number of requests',
-                description: 'A request represents the attempt to withdraw money from the campaign.'
-            },
-            approversCount:{
-                value: summary['3'],
-                meta: 'Number of contributors to the campaign',
-                description: 'Contributors that get to approve withdrawal requests from the campaign.'
-            },
-            manager: {
-                value: summary['4'],
-                meta: 'ERC-20 Manager Address',
-                description: 'Ethereum address from the campaign creator.'
+            address: props.query.slug,
+            summary: {
+                minimumContributionWei: {
+                    value: summary['0'],
+                    meta: 'Minimum Contribution (Wei)',
+                    description: 'Smallest amount to contribute in weit to be part of the Campaign'
+                },
+                balance: {
+                    value: web3.utils.fromWei(summary['1'], 'ether'),
+                    meta: 'Campaign Balance (ETH)',
+                    description: 'Current balance of the campaign.'
+                }, 
+                requestsCount: {
+                    value: summary['2'],
+                    meta: 'Number of requests',
+                    description: 'A request represents the attempt to withdraw money from the campaign.'
+                },
+                approversCount:{
+                    value: summary['3'],
+                    meta: 'Number of contributors to the campaign',
+                    description: 'Contributors that get to approve withdrawal requests from the campaign.'
+                },
+                manager: {
+                    value: summary['4'],
+                    meta: 'ERC-20 Manager Address',
+                    description: 'Ethereum address from the campaign creator.'
+                }
             }
         }
     }
 
     renderCampaignSummary() {
         // retrieve of the elements from props as we do not have an especific object
-        const items = Object.keys(this.props).map(
+        const items = Object.keys(this.props.summary).map(
             key => {
                 return {
-                    header: this.props[key].value,
-                    description: this.props[key].description,
-                    meta: this.props[key].meta,
+                    header: this.props.summary[key].value,
+                    description: this.props.summary[key].description,
+                    meta: this.props.summary[key].meta,
                     fluid: true,
                     style: {overflowWrap: 'break-word'}
                 }
@@ -80,7 +83,7 @@ class CampaignShow extends Component {
                         {this.renderCampaignSummary()}
                     </Grid.Column>
                     <Grid.Column width={6}>
-                        <ContributeForm />
+                        <ContributeForm address={this.props.address} />
                     </Grid.Column>
                 </Grid>
             </Layout>
