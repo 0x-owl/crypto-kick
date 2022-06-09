@@ -18,8 +18,9 @@ class RequestRow extends Component {
             await campaign.methods.approveRequest(this.props.id).send(
                 {from: accounts[0]}
             );
+            console.log(this.props)
             Router.replace({
-                pathname: `/campaigns/${this.props.address}/requests`
+                pathname: `/campaigns/${this.props.slug}/requests`
             });
         } catch(err) {
             this.setState({errorMessage: err.message});
@@ -36,7 +37,7 @@ class RequestRow extends Component {
                 {from: accounts[0]}
             );
             Router.replace({
-                pathname: `/campaigns/${this.props.address}/requests`
+                pathname: `/campaigns/${this.props.slug}/requests`
             });
         } catch(err) {
             this.setState({errorMessage: err.message});
