@@ -1,5 +1,5 @@
 import { React, Component } from 'react';
-import { Button, Table} from 'semantic-ui-react';
+import { Button, ButtonOr, Table} from 'semantic-ui-react';
 import Campaign from '../ethereum/campaign';
 import Router from 'next/router';
 import web3 from '../ethereum/web3';
@@ -56,17 +56,23 @@ class RequestRow extends Component {
                 <Cell>{web3.utils.fromWei(value, 'ether')}</Cell>
                 <Cell>{recipient}</Cell>
                 <Cell>{approvalCount}/{this.props.approversCount} </Cell>
-                <Cell>
-                    {
-                    complete ? null: (
-                        <Button color='green' loading={this.state.loading} basic onClick={this.onApprove}> Approve</Button>
-                    )
-                    }
-                </Cell>
+
                 <Cell>
                     { complete ? null: (
-                        <Button color='red' basic loading={this.state.loading} onClick={this.onFinalize}>Finalize</Button>
-                    )    
+                        <Button.Group>
+                        {
+                        complete ? null: (
+                            <Button color='green' loading={this.state.loading} onClick={this.onApprove}> Approve</Button>
+                        )
+
+                        }
+                        <ButtonOr text="or"></ButtonOr>
+                        { complete ? null: (
+                            <Button color='red' loading={this.state.loading} onClick={this.onFinalize}>Finalize</Button>
+                        )    
+                        }
+                        </Button.Group>
+                    )
                     }
                 </Cell>
             </Row>

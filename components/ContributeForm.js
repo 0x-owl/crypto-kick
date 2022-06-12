@@ -2,7 +2,7 @@ import { React, Component } from 'react';
 import web3 from '../ethereum/web3';
 import Campaign from '../ethereum/campaign';
 import Router from 'next/router';
-import { Button, Form, Input, Message} from 'semantic-ui-react';
+import { Button, Form, Input, Message, Label} from 'semantic-ui-react';
 
 
 class ContributeForm extends Component {
@@ -36,14 +36,16 @@ class ContributeForm extends Component {
         return (
             <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
-                    <label> Amount to contribute: </label>
+                    <Label as='a' color='orange' ribbon='right'>
+                        Amount to contribute:
+                    </Label>
                     <Input 
                         label="ether" value={this.state.value}
                         onChange={evt => this.setState({value: evt.target.value})}
                         labelPosition='right'/>
                 </Form.Field>
                 <Message error header='Oops' content={this.state.errorMessage} />
-                <Button loading={this.state.loading} primary>
+                <Button size="big" loading={this.state.loading} positive>
                     Contribute!
                 </Button>
             </Form>

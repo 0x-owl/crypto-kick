@@ -14,7 +14,6 @@ class NewRequest extends Component {
     render() {
         return (
             <Layout>
-                <h1> Create a New Request! </h1>
                 <RequestForm address={this.props.slug} />
             </Layout>
         )

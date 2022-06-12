@@ -2,10 +2,11 @@ import { React, Component } from 'react'
 import Layout from '../../../components/Layout';
 import ContributeForm from '../../../components/ContributeForm';
 import Campaign from '../../../ethereum/campaign';
-import { Card, Grid, Button } from 'semantic-ui-react';
+import { Card, Grid, Button, Divider, Segment, Icon } from 'semantic-ui-react';
 import web3 from '../../../ethereum/web3';
 import 'semantic-ui-css/semantic.min.css'
 import Link from 'next/link';
+import { faker } from '@faker-js/faker';
 
 
 class CampaignShow extends Component {
@@ -17,6 +18,7 @@ class CampaignShow extends Component {
         amountOfRequests: 0,
         approversCount: 0,
         manager: '',
+        body: '',
         errorMessage: '',
     }
     
@@ -28,6 +30,11 @@ class CampaignShow extends Component {
         return {
             address: props.query.slug,
             summary: {
+                body: {
+                    value: 'Description',
+                    meta: 'Project objectives',
+                    description: faker.lorem.lines()
+                },
                 minimumContributionWei: {
                     value: summary['0'],
                     meta: 'Minimum Contribution (Wei)',
@@ -78,24 +85,29 @@ class CampaignShow extends Component {
     render() {
         return (
             <Layout>
-                <h3> Campaign Details </h3>
-                <Grid>
-                    <Grid.Row>
-                        <Grid.Column width={10}>
-                            {this.renderCampaignSummary()}
-                        </Grid.Column>
-                        <Grid.Column width={6}>
-                            <ContributeForm address={this.props.address} />
-                        </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Link href={`/campaigns/${this.props.address}/requests`}>
-                                <Button primary>View Requests</Button>
-                            </Link>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
+                <Segment>
+                    <h3> Campaign Details </h3>
+                    <Grid columns={2} relaxed='very'>
+                        <Grid.Row >
+                            <Grid.Column width={8}>
+                                {this.renderCampaignSummary()}
+                            </Grid.Column>
+                            <Grid.Column style={{marginLeft:60}} width={6} verticalAlign="middle">
+                                <ContributeForm address={this.props.address} />
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Link href={`/campaigns/${this.props.address}/requests`}>
+                                    <Button primary>View Requests</Button>
+                                </Link>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Divider vertical>
+                            <Icon color="blue" name="chevron circle right" ></Icon>
+                        </Divider>
+                    </Grid>
+                </Segment>
             </Layout>
         )
     }

@@ -1,7 +1,7 @@
 import { React, Component } from 'react'
 import Layout from '../../../../components/Layout';
 import RequestRow from '../../../../components/RequestRow';
-import { Button, Table} from 'semantic-ui-react';
+import { Button, Table, Segment, Divider} from 'semantic-ui-react';
 import Campaign from '../../../../ethereum/campaign';
 import Link from 'next/link';
 
@@ -47,10 +47,21 @@ class RequestIdx extends Component {
 
         return (
             <Layout>
-                <h3> Pending Requests </h3>
-                <Link href={`/campaigns/${this.props.slug}/requests/new`}>
-                    <Button primary floated='right' style={{marginBottom: '10px'}}>Add Request</Button>
-                </Link>
+                <Segment>
+                <Header as="h3">Pending Requests</Header>
+                <Button.Group>
+                    <Link href={`/campaigns/${this.props.slug}/requests/new`}>
+                        <Button positive style={{marginBottom: '10px'}}>
+                            Add Request
+                        </Button>
+                    </Link>
+                    <Button.Or text="or"></Button.Or>
+                    <Link href={`/campaigns/${this.props.slug}`}>
+                        <Button primary style={{marginBottom: '10px'}}>
+                            Back to Campaign
+                        </Button>
+                    </Link>
+                </Button.Group>
                 <Table>
                     <Header>
                         <Row>
@@ -59,14 +70,14 @@ class RequestIdx extends Component {
                             <HeaderCell>Amount (Ether)</HeaderCell>
                             <HeaderCell>Recipient</HeaderCell>
                             <HeaderCell>Approvals Count</HeaderCell>
-                            <HeaderCell>Approve</HeaderCell>
-                            <HeaderCell>Finalize</HeaderCell>
+                            <HeaderCell> Actions </HeaderCell>
                         </Row>
                     </Header>
                     <Body>
                         {this.renderRows()}
                     </Body>
                 </Table>
+                </Segment>
                 <div>
                     Found: {this.props.requestCount} requests.
                 </div>
