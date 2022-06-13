@@ -36,7 +36,8 @@ class CampaignIndex extends Component {
             address => {
                 const name = faker.company.bs()
                 const image = faker.image.abstract()
-                return <CampaignItem name={name} image={image} address={address}></CampaignItem>
+                const desc = faker.lorem.lines()
+                return <CampaignItem name={name} image={image} address={address} desc={desc}></CampaignItem>
             }
         );
         return items
@@ -55,7 +56,6 @@ class CampaignIndex extends Component {
                             </Item.Group>
                         </Grid.Column>
                         <Grid.Column textAlign="center" verticalAlign="middle">
-                            
                             <Link href='/campaigns/new'>                  
                                 <Button
                                     size='huge'

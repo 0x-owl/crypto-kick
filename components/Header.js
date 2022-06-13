@@ -10,7 +10,7 @@ const Header = props => {
             <Menu.Item>
                 <Image src='/Icon.svg' alt='icon' width={50} height={50} />
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item position='right'>
                 <Link href="/">
                     <Button basic icon style={{boxShadow: 'none'}}>
                             <Icon name="home" size='big' color="blue"></Icon>
